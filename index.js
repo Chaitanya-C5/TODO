@@ -9,14 +9,15 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 app.get("/",(req,res)=>{
-    res.render("index.ejs",{arr:arr});
+    arr = [];
+    res.render("index.ejs");
 });
 
 app.post("/submit",(req,res)=>{
     let data = req.body;
     arr.push(data);
     console.log(arr);
-    res.redirect("/");
+    res.render("index.ejs",{arr:arr})
 
 });
 
