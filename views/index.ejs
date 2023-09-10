@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> TODO List</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/styles/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <div id="header" class="row">
+                <div class="heading">
+                    <h1>TODO List</h1>
+                </div>
+            </div>
+
+            <div id="main" class="row">
+                <div class="desc">
+                    <div class="box">
+                        <form name="form1" action="/submit" method="post">
+                            <input type="text" name="title" placeholder="Title" required><br>
+                            <textarea rows="10" cols="22" name="describe" placeholder="Description" required></textarea><br>
+                            <input type="submit" value="save">
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="list">
+                    <div class="roles">
+                        <div class="title">Title</div>
+                        <div class="describe">Description</div>
+                        <div class="status">Status</div>
+                    </div>
+                    <div class="line"><hr></div>
+                    
+
+                    <div class="items">
+
+                        <% if(locals.arr) { %>
+                            
+                            <% for(var i=0;i<arr.length;i++) { %>
+
+                                <div class="item" id="item<%=i%>" >
+                                   <p class="title-content"> <%= arr[i].title %> </p>
+                                    <% var val = arr[i].describe.substr(0,10) %> 
+                                   <p class="desc-content"> <%= val %> </p>
+                                   <button class="btn" onclick="func('item<%=i%>')"></button>
+                                </div>
+
+                            <% } %>
+
+                        <% } %>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script>
+            var flag = true;
+            function func(id)
+            {
+                var ele = "#"+id;
+                if(flag)
+                {
+                    $(ele + ' .btn').css("backgroundColor","#5e92f2");
+
+                    var title = "<del>" + $(ele + ' .title-content').text() + "</del>";
+                    $(ele + ' .title-content').html(title);
+
+                    var desc = "<del>" + $(ele + ' .desc-content').text() + "</del>";
+                    $(ele + ' .desc-content').html(desc);
+
+                    flag = false;
+                }
+                else
+                {
+                    $(ele + ' .btn').css("backgroundColor","white");
+
+                    var title = $(ele + ' .title-content').text();
+                    $(ele + ' .title-content').html(title);
+
+                    var desc = $(ele + ' .desc-content').text();
+                    $(ele + ' .desc-content').html(desc);
+
+                    flag = true;
+                }
+            }
+        </script>
+    </body>
+</html>
