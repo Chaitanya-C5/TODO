@@ -15,10 +15,13 @@ app.get("/",(req,res)=>{
 
 app.post("/submit",(req,res)=>{
     let data = req.body;
-    arr.push(data);
-    res.render("index.ejs",{arr:arr})
-
+    let exists = arr.some(item => item.title === data.title && item.describe === data.describe);
+    if (!exists) {
+        arr.push(data);
+    }
+    res.render("index.ejs",{arr:arr});
 });
+
 
 app.listen(port,()=>{
  console.log(`Listening on ${port}`);
