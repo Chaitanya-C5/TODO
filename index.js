@@ -16,7 +16,6 @@ app.get("/",(req,res)=>{
 app.post("/submit",(req,res)=>{
     let data = req.body;
     arr.push(data);
-    console.log(arr);
     res.render("index.ejs",{arr:arr})
 
 });
